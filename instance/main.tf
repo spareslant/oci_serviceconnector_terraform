@@ -24,10 +24,10 @@ resource "oci_core_instance" "instance" {
   }
 }
 
-resource "local_file" "pem_file" {
-  filename             = pathexpand("./vm_keys/private_key")
+resource "local_sensitive_file" "pem_file" {
+  filename             = pathexpand("./vm_keys/${var.instance_display_name}_${var.tenancy_name}_private_key")
   file_permission      = "600"
   directory_permission = "700"
-  sensitive_content    = tls_private_key.vm_keys.private_key_pem
+  content              = tls_private_key.vm_keys.private_key_pem
   depends_on           = [tls_private_key.vm_keys]
 }

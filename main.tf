@@ -1,10 +1,15 @@
 provider "oci" {
+  tenancy_ocid        = var.tenancy_ocid
   config_file_profile = var.profile_name
   alias               = "tenancy"
 }
 
 provider "tls" {}
 provider "local" {}
+
+data "oci_identity_tenancy" "data_collection_tenancy" {
+    tenancy_id = var.tenancy_ocid
+}
 
 module "user_and_group" {
   source = "./user_and_groups"
@@ -20,6 +25,7 @@ module "user_and_group" {
   policy_name             = var.policy_name
   policy_description      = var.policy_description
   parent_comp_id          = var.tenancy_ocid
+  tenancy_name            = data.oci_identity_tenancy.data_collection_tenancy.name
 }
 
 provider "oci" {
@@ -59,4 +65,5 @@ module "instance" {
   subnet_id             = module.networking.public_subnet_id
   instance_display_name = var.instance_display_name
   image_id              = var.image_id
+  tenancy_name          = data.oci_identity_tenancy.data_collection_tenancy.name
 }

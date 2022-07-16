@@ -1,4 +1,5 @@
 variable "tenancy_ocid" {}
+variable "tenancy_name" {}
 variable "compartment_id" {}
 variable "ad_number" {}
 variable "instance_shape" {}

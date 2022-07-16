@@ -15,3 +15,5 @@ variable "policy_name" {}
 variable "policy_description" {}
 
 variable "parent_comp_id" {}
+
+variable "tenancy_name" {}
