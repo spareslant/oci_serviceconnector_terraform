@@ -1,3 +1,8 @@
+# use following commands to select the profile in ~/.oci/config file and run terraform
+#
+# export TF_VAR_config_file_profile="FRANKFURT"
+# terraform plan
+#
 provider "oci" {
   tenancy_ocid        = var.tenancy_ocid
   config_file_profile = var.profile_name
