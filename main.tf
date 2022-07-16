@@ -16,6 +16,9 @@ data "oci_identity_tenancy" "data_collection_tenancy" {
     tenancy_id = var.tenancy_ocid
 }
 
+data "oci_objectstorage_namespace" "bucket_namespace" {
+}
+
 module "user_and_group" {
   source = "./user_and_groups"
   providers = {
@@ -71,4 +74,15 @@ module "instance" {
   instance_display_name = var.instance_display_name
   image_id              = var.image_id
   tenancy_name          = data.oci_identity_tenancy.data_collection_tenancy.name
+}
+
+module "data_bucket" {
+  source = "./data_bucket"
+  providers = {
+    oci.account = oci.user
+  }
+  depends_on                    = [module.user_and_group]
+  compartment_id                = module.user_and_group.compartment_id
+  bucket_name                   = var.data_bucket_name
+  bucket_namespace              = data.oci_objectstorage_namespace.bucket_namespace.namespace
 }

@@ -56,3 +56,6 @@ variable "instance_display_name" {
 variable "image_id" {
   default = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaacwqra6qcg5iil3pwqdmtorw37prkvxaw4xql6fxt6gx4lp2diyoa"
 }
+variable "data_bucket_name" {
+  default = "data_collection_bucket"
+}
