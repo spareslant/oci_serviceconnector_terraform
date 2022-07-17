@@ -1,4 +1,4 @@
-resource "oci_sch_service_connector" "test_service_connector" {
+resource "oci_sch_service_connector" "data_service_connector" {
   compartment_id = var.compartment_id
   display_name = var.sc_hub_name
   source {
