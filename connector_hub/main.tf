@@ -26,6 +26,18 @@ resource "oci_sch_service_connector" "data_service_connector" {
           }
           namespace = var.sc_source_mon_sources_ns_details_nsps_ns_3
         }
+        namespaces {
+          metrics {
+            kind = var.sc_source_mon_sources_ns_details_nsps_metrics_kind
+          }
+          namespace = var.sc_source_mon_sources_ns_details_nsps_ns_4
+        }
+        namespaces {
+          metrics {
+            kind = var.sc_source_mon_sources_ns_details_nsps_metrics_kind
+          }
+          namespace = var.sc_source_mon_sources_ns_details_nsps_ns_5
+        }
       }
     }
   }

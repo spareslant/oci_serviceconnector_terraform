@@ -6,6 +6,8 @@ variable "sc_source_mon_sources_ns_details_nsps_metrics_kind" {}
 variable "sc_source_mon_sources_ns_details_nsps_ns_1" {}
 variable "sc_source_mon_sources_ns_details_nsps_ns_2" {}
 variable "sc_source_mon_sources_ns_details_nsps_ns_3" {}
+variable "sc_source_mon_sources_ns_details_nsps_ns_4" {}
+variable "sc_source_mon_sources_ns_details_nsps_ns_5" {}
 variable "sc_target_kind" {}
 variable "sc_target_bucket" {}
 variable "sc_target_object_name_prefix" {}

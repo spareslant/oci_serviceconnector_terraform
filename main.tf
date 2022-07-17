@@ -102,6 +102,8 @@ module "connector_hub" {
   sc_source_mon_sources_ns_details_nsps_ns_1 = var.sc_source_mon_sources_ns_details_nsps_ns_1
   sc_source_mon_sources_ns_details_nsps_ns_2 = var.sc_source_mon_sources_ns_details_nsps_ns_2
   sc_source_mon_sources_ns_details_nsps_ns_3 = var.sc_source_mon_sources_ns_details_nsps_ns_3
+  sc_source_mon_sources_ns_details_nsps_ns_4 = var.sc_source_mon_sources_ns_details_nsps_ns_4
+  sc_source_mon_sources_ns_details_nsps_ns_5 = var.sc_source_mon_sources_ns_details_nsps_ns_5
   sc_target_kind = var.sc_target_kind
   sc_target_bucket = module.data_bucket.bucket_name
   sc_target_object_name_prefix = var.sc_target_object_name_prefix

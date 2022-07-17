@@ -82,6 +82,12 @@ variable "sc_source_mon_sources_ns_details_nsps_ns_2" {
 variable "sc_source_mon_sources_ns_details_nsps_ns_3" {
   default = "oci_vcn"
 }
+variable "sc_source_mon_sources_ns_details_nsps_ns_4" {
+  default = "oci_blockstore"
+}
+variable "sc_source_mon_sources_ns_details_nsps_ns_5" {
+  default = "oci_internet_gateway"
+}
 variable "sc_target_kind" {
   default = "objectStorage"
 }
