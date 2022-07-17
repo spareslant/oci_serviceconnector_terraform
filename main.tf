@@ -94,6 +94,7 @@ module "connector_hub" {
   }
   depends_on                    = [module.data_bucket]
   compartment_id                = module.user_and_group.compartment_id
+  parent_comp_id                = var.tenancy_ocid
   sc_hub_name                  = var.sc_hub_name
   sc_source_kind = var.sc_source_kind
   sc_source_mon_sources_ns_details_kind = var.sc_source_mon_sources_ns_details_kind
@@ -104,4 +105,8 @@ module "connector_hub" {
   sc_target_bucket = module.data_bucket.bucket_name
   sc_target_object_name_prefix = var.sc_target_object_name_prefix
   sc_description = var.sc_description
+  policy_name    = var.sc_policy_name
+  policy_description    = var.sc_policy_description
+  group_name              = var.group_name
+  compartment_name        = var.compartment_name
 }

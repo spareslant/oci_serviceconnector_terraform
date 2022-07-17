@@ -9,3 +9,8 @@ variable "sc_target_kind" {}
 variable "sc_target_bucket" {}
 variable "sc_target_object_name_prefix" {}
 variable "sc_description" {}
+variable "policy_name" {}
+variable "policy_description" {}
+variable "parent_comp_id" {}
+variable "group_name" {}
+variable "compartment_name" {}

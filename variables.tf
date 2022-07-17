@@ -88,3 +88,9 @@ variable "sc_target_object_name_prefix" {
 variable "sc_description" {
   default = "Data Collection Service Connector Hub"
 }
+variable "sc_policy_name" {
+  default = "data_service_connector_policy"
+}
+variable "sc_policy_description" {
+  default = "Data service connector policy"
+}
