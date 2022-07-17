@@ -86,3 +86,21 @@ module "data_bucket" {
   bucket_name                   = var.data_bucket_name
   bucket_namespace              = data.oci_objectstorage_namespace.bucket_namespace.namespace
 }
+
+module "connector_hub" {
+  source = "./connector_hub"
+  providers = {
+    oci.account = oci.user
+  }
+  depends_on                    = [module.data_bucket]
+  compartment_id                = module.user_and_group.compartment_id
+  sc_hub_name                  = var.sc_hub_name
+  sc_source_kind = var.sc_source_kind
+  sc_source_mon_sources_ns_details_kind = var.sc_source_mon_sources_ns_details_kind
+  sc_source_mon_sources_ns_details_nsps_metrics_kind = var.sc_source_mon_sources_ns_details_nsps_metrics_kind
+  sc_source_mon_sources_ns_details_nsps_ns_1 = var.sc_source_mon_sources_ns_details_nsps_ns_1
+  sc_target_kind = var.sc_target_kind
+  sc_target_bucket = module.data_bucket.bucket_name
+  sc_target_object_name_prefix = var.sc_target_object_name_prefix
+  sc_description = var.sc_description
+}

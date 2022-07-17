@@ -59,3 +59,29 @@ variable "image_id" {
 variable "data_bucket_name" {
   default = "data_collection_bucket"
 }
+
+# ======== Service Connector Hub variables ========#
+variable "sc_hub_name" {
+  default = "DataCollectionServiceConnectorHub"
+}
+variable "sc_source_kind" {
+  default = "monitoring"
+}
+variable "sc_source_mon_sources_ns_details_kind" {
+  default = "selected"
+}
+variable "sc_source_mon_sources_ns_details_nsps_metrics_kind" {
+  default = "all"
+}
+variable "sc_source_mon_sources_ns_details_nsps_ns_1" {
+  default = "oci_computeagent"
+}
+variable "sc_target_kind" {
+  default = "objectStorage"
+}
+variable "sc_target_object_name_prefix" {
+  default = "first_collection"
+}
+variable "sc_description" {
+  default = "Data Collection Service Connector Hub"
+}
