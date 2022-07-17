@@ -76,6 +76,9 @@ variable "sc_source_mon_sources_ns_details_nsps_metrics_kind" {
 variable "sc_source_mon_sources_ns_details_nsps_ns_1" {
   default = "oci_computeagent"
 }
+variable "sc_source_mon_sources_ns_details_nsps_ns_2" {
+  default = "oci_compute"
+}
 variable "sc_target_kind" {
   default = "objectStorage"
 }
