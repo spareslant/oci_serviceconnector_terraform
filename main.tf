@@ -34,6 +34,8 @@ module "user_and_group" {
   policy_description      = var.policy_description
   parent_comp_id          = var.tenancy_ocid
   tenancy_name            = data.oci_identity_tenancy.data_collection_tenancy.name
+  logging_dynamic_group_name = var.logging_dynamic_group_name
+  logging_dynamic_group_description = var.logging_dynamic_group_description
 }
 
 provider "oci" {

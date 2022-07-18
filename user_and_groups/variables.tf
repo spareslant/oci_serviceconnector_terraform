@@ -17,3 +17,7 @@ variable "policy_description" {}
 variable "parent_comp_id" {}
 
 variable "tenancy_name" {}
+
+variable "logging_dynamic_group_name" {}
+
+variable "logging_dynamic_group_description" {}

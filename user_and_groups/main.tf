@@ -48,3 +48,11 @@ resource "local_sensitive_file" "pem_file" {
   content              = tls_private_key.user_keys.private_key_pem
   depends_on           = [tls_private_key.user_keys, oci_identity_user.user]
 }
+
+resource "oci_identity_dynamic_group" "logging_dynamic_group" {
+    compartment_id = var.parent_comp_id
+    description = var.logging_dynamic_group_description
+    matching_rule = "instance.compartment.id = '${oci_identity_compartment.compartment.id}'"
+    name = var.logging_dynamic_group_name
+  depends_on = [oci_identity_compartment.compartment]
+}

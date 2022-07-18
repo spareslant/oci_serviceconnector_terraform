@@ -59,6 +59,12 @@ variable "image_id" {
 variable "data_bucket_name" {
   default = "data_collection_bucket"
 }
+variable "logging_dynamic_group_name" {
+  default = "logging_dynamic_group"
+}
+variable "logging_dynamic_group_description" {
+  default = "Logging Dynamic Group"
+}
 
 # ======== Service Connector Hub variables ========#
 variable "sc_hub_name" {
