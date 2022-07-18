@@ -109,3 +109,14 @@ variable "sc_policy_name" {
 variable "sc_policy_description" {
   default = "Data service connector policy"
 }
+
+#======= Logging ========#
+variable "log_group_display_name" {
+  default = "data_log_group"
+}
+variable "log_display_name" {
+  default = "data_log"
+}
+variable "log_type" {
+  default = "CUSTOM"
+}

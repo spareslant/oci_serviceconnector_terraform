@@ -115,3 +115,15 @@ module "connector_hub" {
   group_name              = var.group_name
   compartment_name        = var.compartment_name
 }
+
+module "logging" {
+  source = "./logging"
+  providers = {
+    oci.account = oci.user
+  }
+  depends_on                    = [module.user_and_group]
+  compartment_id                = module.user_and_group.compartment_id
+  log_group_display_name        = var.log_group_display_name
+  log_display_name              = var.log_display_name
+  log_type                      = var.log_type
+}
