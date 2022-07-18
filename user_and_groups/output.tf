@@ -9,3 +9,7 @@ output "api_key_fingerprint" {
 output "compartment_id" {
   value = oci_identity_compartment.compartment.id
 }
+
+output "dynamic_group_name" {
+  value = oci_identity_dynamic_group.logging_dynamic_group.name
+}

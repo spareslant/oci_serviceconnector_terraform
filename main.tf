@@ -126,4 +126,10 @@ module "logging" {
   log_group_display_name        = var.log_group_display_name
   log_display_name              = var.log_display_name
   log_type                      = var.log_type
+  ua_configuration_description = var.ua_configuration_description
+  ua_configuration_display_name = var.ua_configuration_display_name
+  ua_configuration_type = var.ua_configuration_type
+  ua_source_type  = var.ua_source_type
+  ua_parser_type  = var.ua_parser_type
+  dynamic_group_name = module.user_and_group.dynamic_group_name
 }

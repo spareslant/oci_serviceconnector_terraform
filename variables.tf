@@ -115,8 +115,23 @@ variable "log_group_display_name" {
   default = "data_log_group"
 }
 variable "log_display_name" {
-  default = "data_log"
+  default = "data_connector_log"
 }
 variable "log_type" {
   default = "CUSTOM"
+}
+variable "ua_configuration_description" {
+  default = "Agent configuration for logging"
+}
+variable "ua_configuration_display_name" {
+  default = "data_agent_logging"
+}
+variable "ua_configuration_type" {
+  default = "LOGGING"
+}
+variable "ua_source_type" {
+  default = "LOG_TAIL"
+}
+variable "ua_parser_type" {
+  default = "SYSLOG"
 }
