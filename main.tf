@@ -38,6 +38,15 @@ module "user_and_group" {
   logging_dynamic_group_description = var.logging_dynamic_group_description
 }
 
+# Following provider will never come into the picture, because we are using
+# export TF_VAR_config_file_profile = "FRANKFURT" to plan and run terraform.
+# env variable takes precedence over any other config.
+# All other module too will be using config from env variable.
+# https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
+
+# Also in Terraform, it is not possible to create dynamic providers yet. So following
+# will not work yet
+# https://discuss.hashicorp.com/t/is-anyone-aware-of-how-to-instantiate-dynamic-providers/34776
 provider "oci" {
   tenancy_ocid     = var.tenancy_ocid
   user_ocid        = module.user_and_group.oci_identity_user.user.id
@@ -49,6 +58,9 @@ provider "oci" {
 
 module "networking" {
   source = "./networking"
+  # module will not be using following provider as we are using config from env variable.
+  # env takes precedence over all other options.
+  # https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
   providers = {
     oci.account = oci.user
   }
@@ -64,6 +76,9 @@ module "networking" {
 
 module "instance" {
   source = "./instance"
+  # module will not be using following provider as we are using config from env variable.
+  # env takes precedence over all other options.
+  # https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
   providers = {
     oci.account = oci.user
   }
@@ -80,6 +95,9 @@ module "instance" {
 
 module "data_bucket" {
   source = "./data_bucket"
+  # module will not be using following provider as we are using config from env variable.
+  # env takes precedence over all other options.
+  # https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
   providers = {
     oci.account = oci.user
   }
@@ -91,6 +109,9 @@ module "data_bucket" {
 
 module "connector_hub" {
   source = "./connector_hub"
+  # module will not be using following provider as we are using config from env variable.
+  # env takes precedence over all other options.
+  # https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
   providers = {
     oci.account = oci.user
   }
@@ -118,6 +139,9 @@ module "connector_hub" {
 
 module "logging" {
   source = "./logging"
+  # module will not be using following provider as we are using config from env variable.
+  # env takes precedence over all other options.
+  # https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
   providers = {
     oci.account = oci.user
   }
