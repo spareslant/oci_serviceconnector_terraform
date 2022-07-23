@@ -9,3 +9,7 @@ output "collection_bucket" {
 output "tenancy_name" {
   value = data.oci_identity_tenancy.data_collection_tenancy.name
 }
+
+output "os_image_id" {
+  value = module.instance.os_image_id
+}

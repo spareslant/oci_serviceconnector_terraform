@@ -8,6 +8,12 @@ resource "tls_private_key" "vm_keys" {
   algorithm = "RSA"
 }
 
+data "oci_core_images" "os_images" {
+  provider = oci.account
+  compartment_id = var.compartment_id
+  display_name = var.os_image_name
+}
+
 resource "oci_core_instance" "instance" {
   provider = oci.account
   availability_domain = data.oci_identity_availability_domain.compartment.name
@@ -21,7 +27,7 @@ resource "oci_core_instance" "instance" {
     ssh_authorized_keys = tls_private_key.vm_keys.public_key_openssh
   }
   source_details {
-    source_id = var.image_id
+    source_id = data.oci_core_images.os_images.images[0].id
     source_type = "image"
   }
   shape_config {

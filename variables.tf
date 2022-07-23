@@ -2,6 +2,7 @@ variable "tenancy_ocid" {}
 variable "region" {}
 variable "profile_name" {}
 
+# ======== group and compartment ========#
 variable "user_name" {}
 variable "user_description" {}
 variable "group_name" {}
@@ -10,16 +11,20 @@ variable "compartment_name" {}
 variable "compartment_description" {}
 variable "policy_name" {}
 variable "policy_description" {}
+
+# ======== networking ========#
 variable "vcn_cidr_blocks" {}
 variable "vcn_display_name" {}
 variable "internet_gateway_display_name" {}
 variable "route_table_display_name" {}
 variable "subnet_display_name" {}
 variable "subnet_cidr_block" {}
+
+# ======== VM instance ========#
 variable "ad_number" {}
 variable "instance_shape" {}
 variable "instance_display_name" {}
-variable "image_id" {}
+variable "os_image_name" {}
 variable "data_bucket_name" {}
 variable "logging_dynamic_group_name" {}
 variable "logging_dynamic_group_description" {}

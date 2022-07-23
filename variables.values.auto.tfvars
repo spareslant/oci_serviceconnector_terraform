@@ -15,6 +15,7 @@ subnet_display_name = "TF_PUBLIC_SUBNET"
 subnet_cidr_block = "10.0.0.0/24"
 # ======== instance ========#
 ad_number = 2
+os_image_name = "Oracle-Linux-8.6-aarch64-2022.06.30-0"
 instance_shape = "VM.Standard.A1.Flex"
 instance_display_name = "TF_INSTANCE"
 data_bucket_name = "data_collection_bucket"

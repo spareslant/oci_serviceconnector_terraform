@@ -85,7 +85,7 @@ module "instance" {
   instance_shape        = var.instance_shape
   subnet_id             = module.networking.public_subnet_id
   instance_display_name = var.instance_display_name
-  image_id              = var.image_id
+  os_image_name              = var.os_image_name
   tenancy_name          = data.oci_identity_tenancy.data_collection_tenancy.name
 }
 
