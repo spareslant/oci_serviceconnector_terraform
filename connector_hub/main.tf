@@ -1,4 +1,5 @@
 resource "oci_sch_service_connector" "data_service_connector" {
+  provider = oci.account
   compartment_id = var.compartment_id
   display_name = var.sc_hub_name
   source {

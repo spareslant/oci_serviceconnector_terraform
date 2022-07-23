@@ -1,10 +1,12 @@
 resource "oci_core_vcn" "vcn" {
+  provider = oci.account
   compartment_id = var.compartment_id
   cidr_blocks = var.vcn_cidr_blocks
   display_name = var.vcn_display_name
 }
 
 resource "oci_core_internet_gateway" "internet_gateway" {
+  provider = oci.account
   compartment_id = var.compartment_id
   vcn_id = oci_core_vcn.vcn.id
   enabled = true
@@ -12,6 +14,7 @@ resource "oci_core_internet_gateway" "internet_gateway" {
 }
 
 resource "oci_core_route_table" "route_table" {
+  provider = oci.account
   compartment_id = var.compartment_id
   vcn_id = oci_core_vcn.vcn.id
   display_name = var.route_table_display_name
@@ -22,6 +25,7 @@ resource "oci_core_route_table" "route_table" {
 }
 
 resource "oci_core_dhcp_options" "dhcp_options" {
+  provider = oci.account
   compartment_id = var.compartment_id
   options {
     type = "DomainNameServer"
@@ -31,6 +35,7 @@ resource "oci_core_dhcp_options" "dhcp_options" {
 }
 
 resource "oci_core_subnet" "public_subnet" {
+  provider = oci.account
   cidr_block = var.subnet_cidr_block
   compartment_id = var.compartment_id
   vcn_id = oci_core_vcn.vcn.id
@@ -39,6 +44,7 @@ resource "oci_core_subnet" "public_subnet" {
 }
 
 resource "oci_core_route_table_attachment" "route_table_attachment" {
+  provider = oci.account
   subnet_id = oci_core_subnet.public_subnet.id
   route_table_id = oci_core_route_table.route_table.id
 }

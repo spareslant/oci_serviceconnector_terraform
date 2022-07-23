@@ -1,9 +1,11 @@
 resource "oci_logging_log_group" "data_log_group" {
+  provider = oci.account
     compartment_id = var.compartment_id
     display_name = var.log_group_display_name
 }
 
 resource "oci_logging_log" "data_log" {
+  provider = oci.account
     display_name = var.log_display_name
     log_group_id = oci_logging_log_group.data_log_group.id
     log_type = var.log_type
@@ -11,6 +13,7 @@ resource "oci_logging_log" "data_log" {
 }
 
 resource "oci_logging_unified_agent_configuration" "data_ua_configuration" {
+  provider = oci.account
     compartment_id = var.compartment_id
     description = var.ua_configuration_description
     display_name = var.ua_configuration_display_name

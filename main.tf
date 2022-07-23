@@ -13,10 +13,12 @@ provider "tls" {}
 provider "local" {}
 
 data "oci_identity_tenancy" "data_collection_tenancy" {
+    provider = oci.tenancy
     tenancy_id = var.tenancy_ocid
 }
 
 data "oci_objectstorage_namespace" "bucket_namespace" {
+    provider = oci.tenancy
 }
 
 module "user_and_group" {
@@ -38,31 +40,28 @@ module "user_and_group" {
   logging_dynamic_group_description = var.logging_dynamic_group_description
 }
 
-# Following provider will never come into the picture, because we are using
-# export TF_VAR_config_file_profile = "FRANKFURT" to plan and run terraform.
-# env variable takes precedence over any other config.
-# All other module too will be using config from env variable.
-# https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
-
-# Also in Terraform, it is not possible to create dynamic providers yet. So following
-# will not work yet
-# https://discuss.hashicorp.com/t/is-anyone-aware-of-how-to-instantiate-dynamic-providers/34776
-provider "oci" {
-  tenancy_ocid     = var.tenancy_ocid
-  user_ocid        = module.user_and_group.oci_identity_user.user.id
-  private_key_path = module.user_and_group.tls_private_key.user_keys.private_key_path
-  fingerprint      = module.user_and_group.oci_identity_api_key.user_api_key.fingerprint
-  region           = var.region
-  alias            = "user"
-}
-
+# # Following provider will never come into the picture, because we are using
+# # export TF_VAR_config_file_profile = "FRANKFURT" to plan and run terraform.
+# # env variable takes precedence over any other config.
+# # All other module too will be using config from env variable.
+# # https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
+# 
+# # Also in Terraform, it is not possible to create dynamic providers yet. So following
+# # will not work yet
+# # https://discuss.hashicorp.com/t/is-anyone-aware-of-how-to-instantiate-dynamic-providers/34776
+# provider "oci" {
+#   tenancy_ocid     = var.tenancy_ocid
+#   user_ocid        = module.user_and_group.oci_identity_user.user.id
+#   private_key_path = module.user_and_group.tls_private_key.user_keys.private_key_path
+#   fingerprint      = module.user_and_group.oci_identity_api_key.user_api_key.fingerprint
+#   region           = var.region
+#   alias            = "user"
+# }
+# 
 module "networking" {
   source = "./networking"
-  # module will not be using following provider as we are using config from env variable.
-  # env takes precedence over all other options.
-  # https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
   providers = {
-    oci.account = oci.user
+    oci.account = oci.tenancy
   }
   depends_on                    = [module.user_and_group]
   compartment_id                = module.user_and_group.compartment_id
@@ -76,11 +75,8 @@ module "networking" {
 
 module "instance" {
   source = "./instance"
-  # module will not be using following provider as we are using config from env variable.
-  # env takes precedence over all other options.
-  # https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
   providers = {
-    oci.account = oci.user
+    oci.account = oci.tenancy
   }
   depends_on            = [module.networking]
   compartment_id        = module.user_and_group.compartment_id
@@ -95,11 +91,8 @@ module "instance" {
 
 module "data_bucket" {
   source = "./data_bucket"
-  # module will not be using following provider as we are using config from env variable.
-  # env takes precedence over all other options.
-  # https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
   providers = {
-    oci.account = oci.user
+    oci.account = oci.tenancy
   }
   depends_on                    = [module.user_and_group]
   compartment_id                = module.user_and_group.compartment_id
@@ -109,11 +102,8 @@ module "data_bucket" {
 
 module "connector_hub" {
   source = "./connector_hub"
-  # module will not be using following provider as we are using config from env variable.
-  # env takes precedence over all other options.
-  # https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
   providers = {
-    oci.account = oci.user
+    oci.account = oci.tenancy
   }
   depends_on                    = [module.data_bucket]
   compartment_id                = module.user_and_group.compartment_id
@@ -136,24 +126,24 @@ module "connector_hub" {
   group_name              = var.group_name
   compartment_name        = var.compartment_name
 }
-
-module "logging" {
-  source = "./logging"
-  # module will not be using following provider as we are using config from env variable.
-  # env takes precedence over all other options.
-  # https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
-  providers = {
-    oci.account = oci.user
-  }
-  depends_on                    = [module.user_and_group]
-  compartment_id                = module.user_and_group.compartment_id
-  log_group_display_name        = var.log_group_display_name
-  log_display_name              = var.log_display_name
-  log_type                      = var.log_type
-  ua_configuration_description = var.ua_configuration_description
-  ua_configuration_display_name = var.ua_configuration_display_name
-  ua_configuration_type = var.ua_configuration_type
-  ua_source_type  = var.ua_source_type
-  ua_parser_type  = var.ua_parser_type
-  dynamic_group_name = module.user_and_group.dynamic_group_name
-}
+# 
+# # module "logging" {
+# #   source = "./logging"
+# #   # module will not be using following provider as we are using config from env variable.
+# #   # env takes precedence over all other options.
+# #   # https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
+# #   providers = {
+# #     oci.account = oci.user
+# #   }
+# #   depends_on                    = [module.user_and_group]
+# #   compartment_id                = module.user_and_group.compartment_id
+# #   log_group_display_name        = var.log_group_display_name
+# #   log_display_name              = var.log_display_name
+# #   log_type                      = var.log_type
+# #   ua_configuration_description = var.ua_configuration_description
+# #   ua_configuration_display_name = var.ua_configuration_display_name
+# #   ua_configuration_type = var.ua_configuration_type
+# #   ua_source_type  = var.ua_source_type
+# #   ua_parser_type  = var.ua_parser_type
+# #   dynamic_group_name = module.user_and_group.dynamic_group_name
+# # }

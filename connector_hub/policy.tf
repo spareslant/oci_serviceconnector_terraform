@@ -1,4 +1,5 @@
 resource "oci_identity_policy" "sc_policy_read_source" {
+  provider = oci.account
   compartment_id = var.parent_comp_id
   description    = var.policy_description
   name           = var.policy_name
@@ -8,6 +9,7 @@ resource "oci_identity_policy" "sc_policy_read_source" {
 }
 
 resource "oci_identity_policy" "sc_policy_write_target" {
+  provider = oci.account
   compartment_id = var.compartment_id
   description    = var.policy_description
   name           = var.policy_name

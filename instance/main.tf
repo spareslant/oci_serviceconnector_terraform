@@ -1,4 +1,5 @@
 data "oci_identity_availability_domain" "compartment" {
+  provider = oci.account
   compartment_id = var.tenancy_ocid
   ad_number = var.ad_number
 }
@@ -8,6 +9,7 @@ resource "tls_private_key" "vm_keys" {
 }
 
 resource "oci_core_instance" "instance" {
+  provider = oci.account
   availability_domain = data.oci_identity_availability_domain.compartment.name
   compartment_id = var.compartment_id
   shape = var.instance_shape
@@ -21,6 +23,10 @@ resource "oci_core_instance" "instance" {
   source_details {
     source_id = var.image_id
     source_type = "image"
+  }
+  shape_config {
+    ocpus = 4
+    memory_in_gbs = 16
   }
 }
 
