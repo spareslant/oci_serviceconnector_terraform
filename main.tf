@@ -123,27 +123,28 @@ module "connector_hub" {
   compartment_name              = var.compartment_name
   logs_tenancy                  = var.logs_tenancy
   logs_tenancy_id               = var.logs_tenancy_id
-  all_logs_info                 = [var.other_tenancy_log_info]
+  #all_logs_info                 = [var.other_tenancy_log_info]
+  all_logs_info                 = [ module.logging.log_info ]
 
 }
-# 
-# # module "logging" {
-# #   source = "./logging"
-# #   # module will not be using following provider as we are using config from env variable.
-# #   # env takes precedence over all other options.
-# #   # https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
-# #   providers = {
-# #     oci.account = oci.user
-# #   }
-# #   depends_on                    = [module.user_and_group]
-# #   compartment_id                = module.user_and_group.compartment_id
-# #   log_group_display_name        = var.log_group_display_name
-# #   log_display_name              = var.log_display_name
-# #   log_type                      = var.log_type
-# #   ua_configuration_description = var.ua_configuration_description
-# #   ua_configuration_display_name = var.ua_configuration_display_name
-# #   ua_configuration_type = var.ua_configuration_type
-# #   ua_source_type  = var.ua_source_type
-# #   ua_parser_type  = var.ua_parser_type
-# #   dynamic_group_name = module.user_and_group.dynamic_group_name
-# # }
+
+module "logging" {
+  source = "./logging"
+  # module will not be using following provider as we are using config from env variable.
+  # env takes precedence over all other options.
+  # https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
+  providers = {
+    oci.account = oci.tenancy
+  }
+  depends_on                    = [module.user_and_group]
+  compartment_id                = module.user_and_group.compartment_id
+  log_group_display_name        = var.log_group_display_name
+  log_display_name              = var.log_display_name
+  log_type                      = var.log_type
+  ua_configuration_description = var.ua_configuration_description
+  ua_configuration_display_name = var.ua_configuration_display_name
+  ua_configuration_type = var.ua_configuration_type
+  ua_source_type  = var.ua_source_type
+  ua_parser_type  = var.ua_parser_type
+  dynamic_group_name = module.user_and_group.dynamic_group_name
+}
