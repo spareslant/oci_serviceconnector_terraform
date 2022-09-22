@@ -78,15 +78,21 @@ module "instance" {
   providers = {
     oci.account = oci.tenancy
   }
-  depends_on            = [module.networking]
-  compartment_id        = module.user_and_group.compartment_id
-  tenancy_ocid          = var.tenancy_ocid
-  ad_number             = var.ad_number
-  instance_shape        = var.instance_shape
-  subnet_id             = module.networking.public_subnet_id
-  instance_display_name = var.instance_display_name
-  os_image_name         = var.os_image_name
-  tenancy_name          = data.oci_identity_tenancy.data_collection_tenancy.name
+  depends_on                   = [module.networking]
+  compartment_id               = module.user_and_group.compartment_id
+  tenancy_ocid                 = var.tenancy_ocid
+  ad_number                    = var.ad_number
+  instance_shape               = var.instance_shape
+  subnet_id                    = module.networking.public_subnet_id
+  instance_display_name        = var.instance_display_name
+  os_image_name                = var.os_image_name
+  tenancy_name                 = data.oci_identity_tenancy.data_collection_tenancy.name
+  tag_namespace_name           = var.tag_namespace_name
+  tag_namespace_description    = var.tag_namespace_description
+  tag_name                     = var.tag_name
+  tag_description              = var.tag_description
+  vm_dynamic_group_name        = var.vm_dynamic_group_name
+  vm_dynamic_group_description = var.vm_dynamic_group_description
 }
 
 module "data_bucket" {
@@ -107,7 +113,7 @@ module "connector_hub" {
   }
   depends_on                    = [module.data_bucket]
   compartment_id                = module.user_and_group.compartment_id
-  tenancy_ocid                = var.tenancy_ocid
+  tenancy_ocid                  = var.tenancy_ocid
   sch_hub_name                  = var.sch_hub_name
   sch_source_kind               = var.sch_source_kind
   sch_target_kind               = var.sch_target_kind
@@ -115,9 +121,9 @@ module "connector_hub" {
   sch_target_object_name_prefix = var.sch_target_object_name_prefix
   sch_description               = var.sch_description
   compartment_name              = var.compartment_name
-  logs_tenancy = var.logs_tenancy
-  logs_tenancy_id = var.logs_tenancy_id
-  all_logs_info = [ var.other_tenancy_log_info ]
+  logs_tenancy                  = var.logs_tenancy
+  logs_tenancy_id               = var.logs_tenancy_id
+  all_logs_info                 = [var.other_tenancy_log_info]
 
 }
 # 

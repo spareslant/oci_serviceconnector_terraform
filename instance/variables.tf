@@ -6,3 +6,9 @@ variable "instance_shape" {}
 variable "subnet_id" {}
 variable "instance_display_name" {}
 variable "os_image_name" {}
+variable "tag_namespace_name" {}
+variable "tag_namespace_description" {}
+variable "tag_name" {}
+variable "tag_description" {}
+variable "vm_dynamic_group_name" {}
+variable "vm_dynamic_group_description" {}

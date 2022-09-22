@@ -28,6 +28,12 @@ variable "os_image_name" {}
 variable "data_bucket_name" {}
 variable "logging_dynamic_group_name" {}
 variable "logging_dynamic_group_description" {}
+variable "tag_namespace_name" {}
+variable "tag_namespace_description" {}
+variable "tag_name" {}
+variable "tag_description" {}
+variable "vm_dynamic_group_name" {}
+variable "vm_dynamic_group_description" {}
 
 # ======== Service Connector Hub variables ========#
 variable "sch_hub_name" {}
