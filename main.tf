@@ -13,12 +13,12 @@ provider "tls" {}
 provider "local" {}
 
 data "oci_identity_tenancy" "data_collection_tenancy" {
-    provider = oci.tenancy
-    tenancy_id = var.tenancy_ocid
+  provider   = oci.tenancy
+  tenancy_id = var.tenancy_ocid
 }
 
 data "oci_objectstorage_namespace" "bucket_namespace" {
-    provider = oci.tenancy
+  provider = oci.tenancy
 }
 
 module "user_and_group" {
@@ -26,17 +26,17 @@ module "user_and_group" {
   providers = {
     oci.account = oci.tenancy
   }
-  user_name               = var.user_name
-  user_description        = var.user_description
-  group_name              = var.group_name
-  group_description       = var.group_description
-  compartment_name        = var.compartment_name
-  compartment_description = var.compartment_description
-  policy_name             = var.policy_name
-  policy_description      = var.policy_description
-  parent_comp_id          = var.tenancy_ocid
-  tenancy_name            = data.oci_identity_tenancy.data_collection_tenancy.name
-  logging_dynamic_group_name = var.logging_dynamic_group_name
+  user_name                         = var.user_name
+  user_description                  = var.user_description
+  group_name                        = var.group_name
+  group_description                 = var.group_description
+  compartment_name                  = var.compartment_name
+  compartment_description           = var.compartment_description
+  policy_name                       = var.policy_name
+  policy_description                = var.policy_description
+  parent_comp_id                    = var.tenancy_ocid
+  tenancy_name                      = data.oci_identity_tenancy.data_collection_tenancy.name
+  logging_dynamic_group_name        = var.logging_dynamic_group_name
   logging_dynamic_group_description = var.logging_dynamic_group_description
 }
 
@@ -85,7 +85,7 @@ module "instance" {
   instance_shape        = var.instance_shape
   subnet_id             = module.networking.public_subnet_id
   instance_display_name = var.instance_display_name
-  os_image_name              = var.os_image_name
+  os_image_name         = var.os_image_name
   tenancy_name          = data.oci_identity_tenancy.data_collection_tenancy.name
 }
 
@@ -94,10 +94,10 @@ module "data_bucket" {
   providers = {
     oci.account = oci.tenancy
   }
-  depends_on                    = [module.user_and_group]
-  compartment_id                = module.user_and_group.compartment_id
-  bucket_name                   = var.data_bucket_name
-  bucket_namespace              = data.oci_objectstorage_namespace.bucket_namespace.namespace
+  depends_on       = [module.user_and_group]
+  compartment_id   = module.user_and_group.compartment_id
+  bucket_name      = var.data_bucket_name
+  bucket_namespace = data.oci_objectstorage_namespace.bucket_namespace.namespace
 }
 
 module "connector_hub" {
@@ -107,24 +107,18 @@ module "connector_hub" {
   }
   depends_on                    = [module.data_bucket]
   compartment_id                = module.user_and_group.compartment_id
-  parent_comp_id                = var.tenancy_ocid
-  sc_hub_name                  = var.sc_hub_name
-  sc_source_kind = var.sc_source_kind
-  sc_source_mon_sources_ns_details_kind = var.sc_source_mon_sources_ns_details_kind
-  sc_source_mon_sources_ns_details_nsps_metrics_kind = var.sc_source_mon_sources_ns_details_nsps_metrics_kind
-  sc_source_mon_sources_ns_details_nsps_ns_1 = var.sc_source_mon_sources_ns_details_nsps_ns_1
-  sc_source_mon_sources_ns_details_nsps_ns_2 = var.sc_source_mon_sources_ns_details_nsps_ns_2
-  sc_source_mon_sources_ns_details_nsps_ns_3 = var.sc_source_mon_sources_ns_details_nsps_ns_3
-  sc_source_mon_sources_ns_details_nsps_ns_4 = var.sc_source_mon_sources_ns_details_nsps_ns_4
-  sc_source_mon_sources_ns_details_nsps_ns_5 = var.sc_source_mon_sources_ns_details_nsps_ns_5
-  sc_target_kind = var.sc_target_kind
-  sc_target_bucket = module.data_bucket.bucket_name
-  sc_target_object_name_prefix = var.sc_target_object_name_prefix
-  sc_description = var.sc_description
-  policy_name    = var.sc_policy_name
-  policy_description    = var.sc_policy_description
-  group_name              = var.group_name
-  compartment_name        = var.compartment_name
+  tenancy_ocid                = var.tenancy_ocid
+  sch_hub_name                  = var.sch_hub_name
+  sch_source_kind               = var.sch_source_kind
+  sch_target_kind               = var.sch_target_kind
+  sch_target_bucket             = module.data_bucket.bucket_name
+  sch_target_object_name_prefix = var.sch_target_object_name_prefix
+  sch_description               = var.sch_description
+  compartment_name              = var.compartment_name
+  logs_tenancy = var.logs_tenancy
+  logs_tenancy_id = var.logs_tenancy_id
+  all_logs_info = [ var.other_tenancy_log_info ]
+
 }
 # 
 # # module "logging" {

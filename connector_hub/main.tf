@@ -1,52 +1,25 @@
 resource "oci_sch_service_connector" "data_service_connector" {
-  provider = oci.account
+  provider       = oci.account
   compartment_id = var.compartment_id
-  display_name = var.sc_hub_name
+  display_name   = var.sch_hub_name
   source {
-    kind = var.sc_source_kind
+    kind = var.sch_source_kind
 
-    monitoring_sources {
-      compartment_id = var.compartment_id
-      namespace_details {
-        kind = var.sc_source_mon_sources_ns_details_kind
-        namespaces {
-          metrics {
-            kind = var.sc_source_mon_sources_ns_details_nsps_metrics_kind
-          }
-          namespace = var.sc_source_mon_sources_ns_details_nsps_ns_1
-        }
-        namespaces {
-          metrics {
-            kind = var.sc_source_mon_sources_ns_details_nsps_metrics_kind
-          }
-          namespace = var.sc_source_mon_sources_ns_details_nsps_ns_2
-        }
-        namespaces {
-          metrics {
-            kind = var.sc_source_mon_sources_ns_details_nsps_metrics_kind
-          }
-          namespace = var.sc_source_mon_sources_ns_details_nsps_ns_3
-        }
-        namespaces {
-          metrics {
-            kind = var.sc_source_mon_sources_ns_details_nsps_metrics_kind
-          }
-          namespace = var.sc_source_mon_sources_ns_details_nsps_ns_4
-        }
-        namespaces {
-          metrics {
-            kind = var.sc_source_mon_sources_ns_details_nsps_metrics_kind
-          }
-          namespace = var.sc_source_mon_sources_ns_details_nsps_ns_5
-        }
+    dynamic "log_sources" {
+      for_each = var.all_logs_info
+      iterator = log_source
+      content {
+        compartment_id = log_source.value.log_compartment_id
+        log_group_id   = log_source.value.log_group_id
+        log_id         = log_source.value.log_id
       }
     }
   }
   target {
-      kind = var.sc_target_kind
-      bucket = var.sc_target_bucket
-      compartment_id = var.compartment_id
-      object_name_prefix = var.sc_target_object_name_prefix
+    kind   = var.sch_target_kind
+    bucket = var.sch_target_bucket
+    # compartment_id = var.compartment_id
+    object_name_prefix = var.sch_target_object_name_prefix
   }
-  description = var.sc_description
+  description = var.sch_description
 }

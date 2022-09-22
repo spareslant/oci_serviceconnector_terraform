@@ -30,20 +30,16 @@ variable "logging_dynamic_group_name" {}
 variable "logging_dynamic_group_description" {}
 
 # ======== Service Connector Hub variables ========#
-variable "sc_hub_name" {}
-variable "sc_source_kind" {}
-variable "sc_source_mon_sources_ns_details_kind" {}
-variable "sc_source_mon_sources_ns_details_nsps_metrics_kind" {}
-variable "sc_source_mon_sources_ns_details_nsps_ns_1" {}
-variable "sc_source_mon_sources_ns_details_nsps_ns_2" {}
-variable "sc_source_mon_sources_ns_details_nsps_ns_3" {}
-variable "sc_source_mon_sources_ns_details_nsps_ns_4" {}
-variable "sc_source_mon_sources_ns_details_nsps_ns_5" {}
-variable "sc_target_kind" {}
-variable "sc_target_object_name_prefix" {}
-variable "sc_description" {}
-variable "sc_policy_name" {}
-variable "sc_policy_description" {}
+variable "sch_hub_name" {}
+variable "sch_source_kind" {}
+variable "sch_target_kind" {}
+variable "sch_target_object_name_prefix" {}
+variable "sch_description" {}
+variable "sch_policy_name" {}
+variable "sch_policy_description" {}
+variable "other_tenancy_log_info" {}
+variable "logs_tenancy" {}
+variable "logs_tenancy_id" {}
 
 #======= Logging ========#
 variable "log_group_display_name" {}
