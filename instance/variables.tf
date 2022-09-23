@@ -12,3 +12,4 @@ variable "tag_name" {}
 variable "tag_description" {}
 variable "vm_dynamic_group_name" {}
 variable "vm_dynamic_group_description" {}
+variable "compartment_name" {}

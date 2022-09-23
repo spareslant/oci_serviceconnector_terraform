@@ -37,7 +37,7 @@ locals {
 resource "oci_identity_dynamic_group" "vm_dynamic_group" {
   provider       = oci.account
   name           = var.vm_dynamic_group_name
-  compartment_id = var.compartment_id
+  compartment_id = var.tenancy_ocid
   description    = var.vm_dynamic_group_description
   matching_rule  = "All {tag.${local.tag_namespace}.${local.tag_key}.value = '${local.tag_value}', instance.compartment.id = '${var.compartment_id}' }"
 }

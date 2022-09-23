@@ -79,6 +79,7 @@ module "instance" {
     oci.account = oci.tenancy
   }
   depends_on                   = [module.networking]
+  compartment_name               = var.compartment_name
   compartment_id               = module.user_and_group.compartment_id
   tenancy_ocid                 = var.tenancy_ocid
   ad_number                    = var.ad_number
