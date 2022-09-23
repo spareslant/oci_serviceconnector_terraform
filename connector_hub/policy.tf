@@ -1,8 +1,8 @@
 resource "oci_identity_policy" "sc_policy_read_source" {
   provider       = oci.account
   compartment_id = var.tenancy_ocid
-  description    = "Policy to allow sch to read from ${var.logs_tenancy} and write to a bucket"
-  name           = "sch_read_logs_from_${var.logs_tenancy}"
+  description    = "Policy to allow sch to read from loggers and write to a bucket"
+  name           = "sch_read_logs_from_loggers"
   statements = [
     # "define tenancy ${var.logs_tenancy} as ${var.logs_tenancy_id}",
 

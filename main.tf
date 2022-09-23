@@ -122,8 +122,8 @@ module "connector_hub" {
   sch_target_object_name_prefix = var.sch_target_object_name_prefix
   sch_description               = var.sch_description
   compartment_name              = var.compartment_name
-  logs_tenancy                  = var.logs_tenancy
-  logs_tenancy_id               = var.logs_tenancy_id
+  # logs_tenancy                  = var.logs_tenancy
+  # logs_tenancy_id               = var.logs_tenancy_id
   #all_logs_info                 = [var.other_tenancy_log_info]
   all_logs_info                 = [ module.logging.log_info ]
 

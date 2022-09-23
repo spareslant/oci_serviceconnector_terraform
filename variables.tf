@@ -43,9 +43,9 @@ variable "sch_target_object_name_prefix" {}
 variable "sch_description" {}
 variable "sch_policy_name" {}
 variable "sch_policy_description" {}
-variable "other_tenancy_log_info" {}
-variable "logs_tenancy" {}
-variable "logs_tenancy_id" {}
+# variable "other_tenancy_log_info" {}
+# variable "logs_tenancy" {}
+# variable "logs_tenancy_id" {}
 
 #======= Logging ========#
 variable "log_group_display_name" {}

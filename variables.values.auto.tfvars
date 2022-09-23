@@ -28,20 +28,20 @@ tag_description                   = "logging source for service connector"
 vm_dynamic_group_name             = "test_vm_group"
 vm_dynamic_group_description      = "dynamic group for test vm"
 # ======== Service Connector Hub variables ========#
-sch_hub_name                  = "DataCollectionServiceConnectorHub"
+sch_hub_name                  = "ServiceConnectorHub"
 sch_source_kind               = "logging"
 sch_target_kind               = "objectStorage"
 sch_target_object_name_prefix = "first_collection"
 sch_description               = "Data Collection Service Connector Hub"
 sch_policy_name               = "data_service_connector_policy"
 sch_policy_description        = "Data service connector policy"
-other_tenancy_log_info = {
-  log_id             = "123"
-  log_group_id       = "456"
-  log_compartment_id = "789"
-}
-logs_tenancy    = ""
-logs_tenancy_id = ""
+# other_tenancy_log_info = {
+#   log_id             = "123"
+#   log_group_id       = "456"
+#   log_compartment_id = "789"
+# }
+# logs_tenancy    = ""
+# logs_tenancy_id = ""
 #======= Logging ========#
 log_group_display_name        = "data_log_group"
 log_display_name              = "data_connector_log"
